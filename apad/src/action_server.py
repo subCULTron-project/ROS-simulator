@@ -229,16 +229,10 @@ class aPadActionServer:
                             self.staticPosPub[index] = rospy.Publisher('/' + self.as_goal.object + '/position_static', NavSts, queue_size=1)
                             self.perchedObjects[index] = self.as_goal.object
                             print 'finished executing perch action ' + self.as_goal.object
-                        
-                            self.as_res.status = 0
-                            #self.perched_count+=1
-                            self.action_server.set_succeeded(self.as_res)
-                        else:
-                            self.as_res.status = -1
-                            #self.perched_count+=1
-                            self.action_server.set_succeeded(self.as_res)
-
                         self.action_rec_flag = 0  # waiting for new action
+                        self.as_res.status = 0
+                        #self.perched_count+=1
+                        self.action_server.set_succeeded(self.as_res)
 
                     elif self.as_goal.id == 2:
                         print 'executing release action'
@@ -258,7 +252,6 @@ class aPadActionServer:
                         self.as_res.status = 0
                         #self.perched_count-=1
                         self.action_server.set_succeeded(self.as_res)
-
             else:
                 pass
 
