@@ -1,0 +1,16 @@
+<launch>
+  <!-- GPS setup -->
+  <arg name="novatel_port" default="$(optenv NOVATEL_PORT /dev/novatel)" />
+  <arg name="novatel_baud" default="$(optenv NOVATEL_BAUD 115200)" />
+  <arg name="use_novatel_gps" default="$(optenv NOVATEL_USE_GPS false)" />
+  
+  <node pkg="novatel_dgps" type="novatel_gps" name="novatel">
+	<param name="port_name" value="$(arg novatel_port)" />
+	<param name="baud" value="$(arg novatel_baud)" />
+	<remap from="fix" to="gps" if="$(arg use_novatel_gps)"/>
+	<remap from="fix" to="fix_novatel" unless="$(arg use_novatel_gps)"/>
+  </node>
+ 
+  <node pkg="novatel_dgps" type="get_share.sh" name="dgps_corrections"
+       args="$(arg novatel_port) topside-gateway:35000" />
+</launch>

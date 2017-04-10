@@ -1,0 +1,124 @@
+<!--/*****************************************************************
+ * labust_sim_template.launch
+ *
+ *  Created on: Apr 16, 2014
+ *      Author: Filip Mandic
+ *
+ *****************************************************************/-->
+
+<launch>
+     <arg name="imu" default="false" />
+     <arg name="dvl" default="false" />
+
+    <!-- ========================================================= -->
+    <!-- == Arguments ============================================ -->
+    <!-- ========================================================= -->
+
+	<!--<rosparam command="load" file="$(env MODEL)" />
+  	<rosparam command="load" file="$(env ALLOCATION_MODEL)" />-->
+
+    <!-- ========================================================= -->
+    <!-- == Dynamic simulation node ============================== -->
+    <!-- ========================================================= -->
+    <node 
+	    pkg="labust_sim" 
+	    type="uvsim" 
+		name="uvsim">    	    
+	
+		<param name="Rate" value="10" />
+		<param name="ModelWrap" value="1" />
+		<param name="publish_world" value="false" />
+		<param name="publish_sim_base" value="true" />
+		
+		<param name="maxThrust" value="1" />
+		<param name="minThrust" value="-1" />
+			
+		<remap from="tauIn" to="tauOut" />
+		<remap from="meas_ideal" to="position" />
+   </node>
+
+    <!-- ========================================================= -->
+    <!-- == IMU sensor simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <group if="$(arg imu)">
+      <node
+		pkg="labust_sim" 
+		type="imu_sim" 
+		name="imu_sim">
+
+		<remap from="meas_odom" to="meas_odom_noisy" if="$(optenv USE_NOISE 0)" />
+     </node>	
+   </group>
+
+    <!-- ========================================================= -->
+    <!-- == DVL sensor simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <group if="$(arg dvl)">
+      <node 
+		pkg="labust_sim" 
+		type="dvl_sim" 
+		name="dvl_sim">
+
+	  	<remap from="meas_odom" to="meas_odom_noisy" if="$(optenv USE_NOISE 0)" />
+     </node>		
+   </group>
+
+    <!-- ========================================================= -->
+    <!-- == GPS sensor simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <!--node 
+		pkg="labust_sim" 
+		type="gps_sim" 
+		name="gps_sim">
+
+		<remap from="meas_odom" to="meas_odom_noisy" if="$(optenv USE_NOISE 0)" />
+		<remap from="fix" to="gps" />
+		<param name="gps_height" value="0.25" />
+		<param name="gps_pub" value="10" />
+    </node-->
+
+    <!-- ========================================================= -->
+    <!-- == Current sensor simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <group if="$(arg current_sensor)">
+      <node 
+		pkg="labust_sim" 
+		type="current_sensor_sim" 
+		name="current_sensor_sim">
+
+		<param name="current_depth" value="0.8" />
+
+      </node>	
+    </group>
+
+    <!-- ========================================================= -->
+    <!-- == Docking simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <group if="$(arg docking_sim)">
+      <node 
+		pkg="labust_sim" 
+		type="docking_sim" 
+		name="docking_sim">
+
+		<param name="maximum_docked" value="4" />
+
+      </node>
+    </group>
+
+    <!-- ========================================================= -->
+    <!-- == Battery simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <node 
+		pkg="labust_sim" 
+		type="battery_sensor_sim" 
+		name="battery_sensor_sim">
+
+    </node>
+
+</launch>

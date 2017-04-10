@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<robot name="afish">
+
+ <link name="base_link"> <!-- one robot part, multiple links, joins -->
+  <visual>
+   <geometry>
+    <sphere radius=".16"/>
+   </geometry>
+   <material name="color">
+    <color rgba="255 0 0 1"/>
+   </material>
+  </visual>
+ </link>
+
+ <link name="fish_tail">
+  <visual>
+   <geometry>
+    <box size=".2 .2 .05"/>
+   </geometry>
+  </visual>
+ </link>
+
+ <link name="fish_up_flipper">
+  <visual>
+   <geometry>
+    <box size=".02 .08 .05"/>
+   </geometry>
+  </visual>
+ </link>
+
+ <link name="fish_down_flipper_left">
+  <visual>
+   <geometry>
+    <box size=".02 .06 .05"/>
+   </geometry>
+  </visual>
+ </link>
+
+ <link name="fish_down_flipper_right">
+  <visual>
+   <geometry>
+    <box size=".02 .06 .05"/>
+   </geometry>
+  </visual>
+ </link>
+
+ <joint name="tail" type="fixed">
+  <parent link="base_link"/>
+  <child link="fish_tail" />
+  <origin rpy="1.57 0.785 0" xyz="-0.18 0 0"/>
+ </joint>
+ 
+ <joint name="flipper_up" type="fixed">
+  <parent link="base_link"/>
+  <child link="fish_up_flipper"/>
+  <origin rpy="0.785 0 1.57" xyz="0 0 0.16"/>
+ </joint>
+
+ <joint name="flipper_down_left" type="fixed">
+  <parent link="base_link"/>
+  <child link="fish_down_flipper_left"/>
+  <origin rpy="2.355 0 1.57" xyz="0.02 0 -0.16"/>
+ </joint>
+
+  <joint name="flipper_down_right" type="fixed">
+  <parent link="base_link"/>
+  <child link="fish_down_flipper_right"/>
+  <origin rpy="2.355 0 1.57" xyz="-0.06 0 -0.16"/>
+ </joint>
+
+</robot>
+
+     
+				
+

@@ -1,0 +1,26 @@
+<launch>
+  <!-- The configuration assumes direct connection to ublox GPS and Spatial -->
+  <!-- GPS: NOVATEL, UBLOX, SPATIAL on a Multiplexer Switch, IMU: spatial, DVL: none -->
+  <!-- Namespace: none -->
+
+  <!-- Arguments -->
+  <param name="use_sim_time" value="true"/>
+  <node 
+		pkg="snippets" 
+		type="simulation_clock2" 
+		name="simulation_clock2">
+
+    </node>
+  <arg name="logging" default="$(optenv LOGGING false)" />
+  
+
+<node
+        pkg="uwsim" 
+        name="uwsim" 
+        type="uwsim" 
+        args="--configfile $(find subcultron_launch)/data/simulation/swarm_test.xml  
+  		--dataPath  $(find subcultron_launch)/data/simulation/"/>
+	
+  <!-- Start logger -->
+  <!--node pkg="rosbag" type="record" name="logger" args="-a -x '(.*)/camera(.*)|(.*)/sonar/(.*)|(.*)/soundmetrics_aris3000/(.*)' -o /home/stdops/logs/bags/amussel" if="$(arg logging)" /-->
+</launch>

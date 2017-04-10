@@ -1,0 +1,17 @@
+#Operation modes
+int32 u=0
+int32 v=1
+int32 w=2
+int32 p=3
+int32 q=4
+int32 r=5
+
+int32 X=0
+int32 Y=1
+int32 Z=2
+int32 K=3
+int32 M=4
+int32 N=5
+
+auv_msgs/Bool6Axis disable_axis
+---

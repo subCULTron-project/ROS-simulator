@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<vehicle>
+<name></name>
+<file>apad.urdf</file>
+<position>
+<x> 0</x>
+<y> 0 </y>
+<z> 0 </z>
+</position>
+<orientation>
+<r>0</r>
+<p>0</p>
+<y>0</y>
+</orientation>
+
+<imu>
+<name>imu</name>
+<relativeTo>base_link</relativeTo>
+<position>
+<x>0</x>
+<y>0</y>
+<z>0</z>
+</position>
+<orientation>
+<r>0</r>
+<p>0</p>
+<y>0</y>
+</orientation>
+<std>0.00000001</std>
+</imu>
+
+<gpsSensor>
+<name>GPSSensor</name>
+<relativeTo>base_link</relativeTo>
+<position>
+<x>0</x>
+<y>0</y>
+<z>0</z>
+</position>
+<orientation>
+<r>0</r>
+<p>0</p>
+<y>0</y>
+</orientation>
+<std>0.00005</std>
+</gpsSensor>
+
+</vehicle>

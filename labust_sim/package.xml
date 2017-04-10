@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package>
+	<name>labust_sim</name>
+	<version>0.1.0</version>
+	<description>
+	    The vehicle and sensor simulation package. The package
+		contains the 6DOF vehicle model,transform frame publishing 
+		and basic sensor simulations (imu, gps, dvl, etc.).
+	</description>
+	<maintainer email="dula.nad@gmail.com">Gyula Nagy</maintainer>
+	<author email="dula.nad@gmail.com">Gyula Nagy</author>
+	<license>BSD</license>
+	<!-- <url type="website">http://ros.org/wiki/labust_sim</url> -->
+
+	<buildtool_depend>catkin</buildtool_depend>
+	<build_depend>cmake_modules</build_depend>
+	<build_depend>auv_msgs</build_depend>
+	<build_depend>roscpp</build_depend>
+	<build_depend>rospy</build_depend>
+	<build_depend>tf2_ros</build_depend>
+	<build_depend>snippets</build_depend>
+	<build_depend>nav_msgs</build_depend>
+	<build_depend>roslib</build_depend>
+	
+	<run_depend>auv_msgs</run_depend>
+	<run_depend>roscpp</run_depend>
+	<run_depend>rospy</run_depend>
+	<run_depend>tf2_ros</run_depend>
+	<run_depend>nav_msgs</run_depend>
+	
+	<export>
+	    <!-- <labust_sim plugin="${prefix}/plugins.xml" /> -->
+	    <rosdoc config="rosdoc.yaml" />
+	</export>
+</package>

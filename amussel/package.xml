@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <name>amussel</name>
+  <version>0.1.0</version>
+  <description>The driver and configuration data for the aMussel underwater vehicle.</description>
+
+  <maintainer email="anja.babic@fer.hr">Anja Babic</maintainer>
+  <license>BSD</license>
+  <!-- <url type="website">http://ros.org/wiki/pladypos</url> -->
+  <author email="dula.nad@gmail.com">Gyula Nagy</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>cmake_modules</build_depend>
+  <build_depend>auv_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>diagnostic_msgs</build_depend>
+  <build_depend>snippets</build_depend>
+  
+  <run_depend>auv_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
+  <run_depend>diagnostic_msgs</run_depend>
+  
+</package>

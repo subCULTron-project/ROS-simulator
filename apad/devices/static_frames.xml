@@ -1,0 +1,22 @@
+<launch> 
+	<arg name="use_gps" default="true" />		
+	<arg name="use_imu" default="false" />		
+	<arg name="use_usbl" default="false" />		
+	<arg name="use_dvl" default="false" />		
+
+<!--	<node pkg="tf2_ros" type="static_transform_publisher" name="gps_frame_publisher" 
+		args="-0.095 0.22 -0.36 0 0 0 1 base_link gps_frame" if="$(arg use_gps)"/> -->
+	
+	<node pkg="tf2_ros" type="static_transform_publisher" name="gps_frame_publisher" 
+		args="0.0 0.0 0.0 0 0 0 1 base_link gps_frame" if="$(arg use_gps)"/>
+
+	<node pkg="tf2_ros" type="static_transform_publisher" name="imu_frame_publisher"
+		args="0 0 0 0 0 -0.258819 0.965926 base_link imu_frame" if="$(arg use_imu)" />
+	<!--		args="0 0 0 0 0 0 1 base_link imu_frame" if="$(arg use_imu)" /> -->
+		
+	<node pkg="tf2_ros" type="static_transform_publisher" name="usbl_frame_publisher"
+		args="0 0 0 0 0 0 1 base_link usbl_frame" if="$(arg use_usbl)" />
+	
+	<node pkg="tf2_ros" type="static_transform_publisher" name="dvl_frame_publisher"
+		args="0 0 0 0 0 0 1 base_link dvl_frame" if="$(arg use_dvl)"/>
+</launch>

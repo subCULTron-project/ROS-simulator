@@ -1,0 +1,25 @@
+sampling_time: 0.1
+mass: 1.0
+gravity: 9.81
+fluid_density: 1025.0
+
+# The bounding ellipsoid parameters (ax, ay, az) used for buoyancy calculation
+bounding_ellipsoid: [0.1,0.1,0.1]
+
+# The dynamic parameters
+rg: [0, 0, 0] # The location vector of the COG
+rb: [0, 0, 0] # The location vector of the buoyancy 
+inertia_matrix: [1, 1, 0.61] # Matrix (3x3) or diagonal elements (1x3)
+added_mass: [3.2, 3.2, 0.74, 0, 0, 0] # Matrix (6x6) or diagonal elements (1x6)
+linear_damping: [0.0, 0.0, 20, 20, 20, 0.25] # Matrix (6x6) or diagonal elements (1x6)
+quadratic_damping: [5.0,5.0,0,0,0,0.0] # Matrix (6x6) or diagonal elements (1x6)
+
+# The initial states
+eta0: [0,0,0,0,0,0] # Initial pose
+nu0:  [0,0,0,0,0,0] # Initial speeds
+current: [0,0,0] # Initial currents (N,E,D)
+
+# The process and measurement noise specification
+process_noise: [0.05,0.05,0.05,0.02,0.02,0.02] # Vector (6)
+measurement_noise: [1,1,0.02,0.01,0.01,0.01] # Vector (6)
+coupled: false # Use a coupled model

@@ -1,0 +1,21 @@
+<relay_config>
+    <module id="pladypos-eth" srv="pladypos_eth">
+        <relay id="Motor1" address="0" />
+        <relay id="Motor2" address="1" />
+        <relay id="Motor3" address="2" />
+        <relay id="Motor4" address="3" />
+        <relay id="USBL" address="5" />
+        <relay id="VR1" address="6" />
+        <relay id="VR2" address="7" />
+    </module>
+    <module id="pladypos-eth" srv="pladypos_eth2">
+        <relay id="Motor1" address="0" />
+        <relay id="Motor2" address="1" />
+        <relay id="Motor3" address="2" />
+        <relay id="Motor4" address="3" />
+        <relay id="USBL" address="5" />
+        <relay id="VR1" address="6" />
+        <relay id="VR2" address="7" />
+    </module>
+</relay_config>
+

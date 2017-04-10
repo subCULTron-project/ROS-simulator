@@ -1,0 +1,7 @@
+hldiagnostics_t: [labust_control, HLMessage,['mode',
+                            'ref_point.point.x',
+                            'ref_point.point.y',
+                            'ref_point.point.z',
+                            'radius',
+                            'surge',
+                            'yaw']]

@@ -1,0 +1,33 @@
+### go2point action ###
+
+### Primitive subtype and associated constants (flags)
+uint8 subtype
+uint8 GO2POINT_UA = 0
+uint8 GO2POINT_FA = 1
+uint8 GO2POINT_FA_HDG = 2
+
+### Reference type and associated constants (flags)
+uint8 ref_type
+uint8 CONSTANT = 0
+uint8 HEADING_TOPIC = 1
+uint8 SPEED_TOPIC = 2
+uint8 ALL_TOPIC = 3
+
+### The goal
+geometry_msgs/PointStamped T1 # Desired start point
+geometry_msgs/PointStamped T2 # Desired end point
+float32 heading # The desired heading for overactuated vehicles
+float32 speed # The desired forward speed
+float32 victory_radius # The victory radius
+string[] topics
+---
+### The result
+geometry_msgs/PointStamped position # Finish point
+float32 distance # Distance to end point
+float32 bearing # Bearing to end point
+---
+### The feedback
+float32 distance # Distance to end point
+float32 bearing # Bearing to end point
+ 
+

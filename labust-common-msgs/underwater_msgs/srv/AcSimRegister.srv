@@ -1,0 +1,5 @@
+# The registering node id
+int32 node_id
+# auv_msgs/NavSts topic name
+string navsts_topic
+---

@@ -1,0 +1,163 @@
+<!--/*****************************************************************
+ * labust_sim_template.launch
+ *
+ *  Created on: Apr 16, 2014
+ *      Author: Filip Mandic
+ *
+ *****************************************************************/-->
+
+<launch>
+
+    <!-- ========================================================= -->
+    <!-- == Arguments ============================================ -->
+    <!-- ========================================================= -->
+
+	<!--<rosparam command="load" file="$(env MODEL)" />
+  	<rosparam command="load" file="$(env ALLOCATION_MODEL)" />-->
+
+    <!-- ========================================================= -->
+    <!-- == Dynamic simulation node ============================== -->
+    <!-- ========================================================= -->
+    <node 
+	    pkg="labust_sim" 
+	    type="uvsim" 
+		name="uvsim">    	    
+	
+		<param name="Rate" value="10" />
+		<param name="ModelWrap" value="1" />
+		<param name="publish_world" value="false" />
+		<param name="publish_sim_base" value="true" />
+		
+		<param name="maxThrust" value="1" />
+		<param name="minThrust" value="-1" />
+			
+		<remap from="tauIn" to="tauOut" />
+		<remap from="meas_ideal" to="position" />
+   </node>
+   
+    <!-- ========================================================= -->
+    <!-- == LocalFixSim node ===================================== -->
+    <!-- ========================================================= -->
+   
+   <!--node 
+        pkg="labust_navigation" 
+        type="llnode" 
+        name="tf_frame_node_sim">
+
+        <param name="LocalFixSim" value="true" if="$(optenv USE_LOCAL_FIX 1)" />
+
+    </node-->
+
+
+    <!-- ========================================================= -->
+    <!-- == IMU sensor simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <node 
+		pkg="labust_sim" 
+		type="imu_sim" 
+		name="imu_sim">
+
+		<remap from="meas_odom" to="meas_odom_noisy" if="$(optenv USE_NOISE 0)" />
+   </node>	
+
+    <!-- ========================================================= -->
+    <!-- == DVL sensor simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <node 
+		pkg="labust_sim" 
+		type="dvl_sim" 
+		name="dvl_sim">
+
+	  	<remap from="meas_odom" to="meas_odom_noisy" if="$(optenv USE_NOISE 0)" />
+   </node>		
+
+    <!-- ========================================================= -->
+    <!-- == GPS sensor simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <node 
+		pkg="labust_sim" 
+		type="gps_sim" 
+		name="gps_sim">
+
+		<remap from="meas_odom" to="meas_odom_noisy" if="$(optenv USE_NOISE 0)" />
+		<remap from="fix" to="gps" />
+		<param name="gps_height" value="0.25" />
+		<param name="gps_pub" value="10" />
+    </node>
+
+    <!-- ========================================================= -->
+    <!-- == Current sensor simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <node 
+		pkg="labust_sim" 
+		type="current_sensor_sim" 
+		name="current_sensor_sim">
+
+		<param name="current_depth" value="0.8" />
+
+    </node>	
+
+    <!-- ========================================================= -->
+    <!-- == Ping simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <node 
+		pkg="labust_sim" 
+		type="ping_sim" 
+		name="ping_sim">
+
+		<param name="ping_range" value="20" />
+
+    </node>
+
+    <!-- ========================================================= -->
+    <!-- == Docking simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <node 
+		pkg="labust_sim" 
+		type="docking_sim" 
+		name="docking_sim">
+
+		<param name="maximum_docked" value="4" />
+
+    </node>
+
+    <!-- ========================================================= -->
+    <!-- == Battery simulation node =========================== -->
+    <!-- ========================================================= -->
+
+    <node 
+		pkg="labust_sim" 
+		type="battery_sensor_sim" 
+		name="battery_sensor_sim">
+
+    </node>
+
+    <!-- ========================================================= -->
+    <!-- == Environment simulation node ========================== -->
+    <!-- ========================================================= -->
+
+    <node 
+		pkg="labust_sim" 
+		type="environment_sim.py" 
+		name="environment_sim"
+		output="screen">
+
+		<!-- Current simulation : available modes {constant, periodic} 			      -->
+		<!--If you do not want use the current simulation, set the current_mode param to none -->
+		<param name="current_mode" value="none" />
+		<param name="current_publish_rate" value="0.5" />
+
+		<!-- Temperature simulation : available modes {constant} 	                       -->
+		<!--If you do not want use the temperature simulation, set the temp_mode param to none -->
+		<param name="temp_mode" value="constant" />
+		<param name="temp_publish_rate" value="0.5" />
+		
+    </node>
+
+</launch>

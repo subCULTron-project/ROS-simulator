@@ -1,0 +1,22 @@
+nu_manual/maximum_speeds: [0.1,0.1,0.1,0,0,0.5]
+ref_manual/maximum_speeds: [0.1,0.1,0.1,0,0,0.5]
+#DP controller
+dp_controller/closed_loop_freq: [0.2,0.2]
+#Alt/Depth controller
+alt_controller/closed_loop_freq: 0.3
+#Heading controller
+hdg_controller/closed_loop_freq: 0.6
+#Line-following controller
+ualf_controller/closed_loop_freq: 0.4
+#Velocity controller
+velocity_controller/closed_loop_freq: [1.0,1.0,1.2,1.0,1.0,2.4]
+velocity_controller/auto_tracking: [0.0,0.0,0.0,1.0,1.0,0.0]
+velocity_controller/Ts: 0.1
+velocity_controller/timeout: 2.0
+velocity_controller/Surge_joy_scale : 2.82
+velocity_controller/Heave_joy_scale : 0.0
+velocity_controller/Sway_joy_scale : 2.82
+velocity_controller/Yaw_joy_scale : 4.0
+velocity_controller/external_ident: true
+velocity_controller/use_ground_vel: false
+

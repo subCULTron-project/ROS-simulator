@@ -1,0 +1,18 @@
+<launch>
+    <arg name="use_local_fix" default="$(optenv USE_LOCAL_FIX false)" />
+    <arg name="use_imu_yaw_rate" default="$(optenv USE_IMU_YAW_RATE false)" />
+       
+    <!-- EKF navigation filter -->
+    <node pkg="labust_navigation" type="ekf3d_node" name="ekf_nav">
+		<param name="imu_with_yaw_rate" value="$(arg use_imu_yaw_rate)" />
+		<param name="dvl_model" value="1" />
+		<param name="Ts" value="0.1" />
+		<remap from="stateHat" to="position" />
+		<remap from="meas" to="measurement" />
+    </node>
+    
+    <!-- TF Frame node - publishes worldLatLon->world->local frame transformations -->
+    <node pkg="labust_navigation" type="llnode" name="tf_frame_node">
+        <param name="LocalFixSim" value="$(arg use_local_fix)" />
+    </node>
+</launch>

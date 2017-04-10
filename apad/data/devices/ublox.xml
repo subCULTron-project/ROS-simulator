@@ -1,0 +1,19 @@
+<launch>
+  <!-- GPS setup -->
+  <arg name="ublox_port" default="$(optenv UBLOX_PORT /dev/ublox)" />
+  <arg name="ublox_baud" default="$(optenv UBLOX_BAUD 115200)" />
+  <arg name="use_ublox_gps" default="$(optenv UBLOX_USE_GPS true)" />
+
+  <node pkg="ublox_gps" type="ublox_gps_node" name="ublox">
+	<param name="device" value="$(arg ublox_port)" />
+	<param name="baudrate" value="$(arg ublox_baud)" />
+        <param name="frame_id" value="gps_frame" />
+        <param name="rate_meas" value="500" />
+        <param name="sbas" value="true" />
+        <!-- Protocol messages -->
+	<param name="all" value="true" />
+	<!-- Remappings -->
+ 	<remap from="fix" to="gps" if="$(arg use_ublox_gps)" />
+ 	<remap from="fix" to="fix_ublox" unless="$(arg use_ublox_gps)" />
+  </node>
+</launch>

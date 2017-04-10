@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot name="pladypos">
+<link name="base_link">
+<visual>
+<origin rpy="3.14159 0 0.786475" xyz="0 0 0"/>
+<geometry>
+<mesh filename="pladypos.osg"/>
+</geometry>
+</visual>
+</link>
+</robot>

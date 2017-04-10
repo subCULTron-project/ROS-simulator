@@ -1,0 +1,14 @@
+#The GOAL
+geometry_msgs/PointStamped T1 # Desired station point
+float32 yaw # The desired yaw for overactuated vehicles
+float32 radius # The operation radius for underactuated vehicles
+---
+#The result
+geometry_msgs/PointStamped position# Finish point
+---
+#The feedback
+geometry_msgs/PointStamped error # The current station keeping error
+float32 distance
+float32 bearing
+ 
+

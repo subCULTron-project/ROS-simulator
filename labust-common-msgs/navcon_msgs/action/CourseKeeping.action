@@ -1,0 +1,28 @@
+### course_keeping action ###
+
+### Primitive subtype and associated constants (flags)
+uint8 subtype
+uint8 COURSE_KEEPING_UA = 0
+uint8 COURSE_KEEPING_FA = 1
+uint8 COURSE_KEEPING_FA_HDG = 2
+
+### Reference type and associated constants (flags)
+uint8 ref_type
+uint8 CONSTANT = 0
+uint8 HEADING_TOPIC = 1
+uint8 SPEED_TOPIC = 2
+uint8 ALL_TOPIC = 3
+
+### The goal
+float32 course # Desired course to keep
+float32 speed # The desired forward speed, setting the forward speed=0 will result in heading keeping
+float32 yaw # The desired yaw for overactuated vehicles
+string[] topics
+---
+### The result
+int32 success # The success flag
+---
+### The feedback
+int32 feedback # The current feedback
+ 
+

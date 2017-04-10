@@ -1,0 +1,173 @@
+cmake_minimum_required(VERSION 2.8.3)
+project(labust_sim)
+
+## Find catkin macros and libraries
+## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
+## is used, also find other catkin packages
+find_package(catkin REQUIRED COMPONENTS 
+    roslib
+    cmake_modules
+    auv_msgs 
+    nav_msgs
+    roscpp 
+    rospy 
+    tf2_ros 
+    snippets)
+
+## System dependencies are found with CMake's conventions
+find_package(Boost REQUIRED COMPONENTS random)
+find_package(Eigen REQUIRED)
+
+
+## Uncomment this if the package has a setup.py. This macro ensures
+## modules and global scripts declared therein get installed
+## See http://ros.org/doc/groovy/api/catkin/html/user_guide/setup_dot_py.html
+# catkin_python_setup()
+
+#######################################
+## Declare ROS messages and services ##
+#######################################
+
+## Generate messages in the 'msg' folder
+# add_message_files(
+#   FILES
+#   Message1.msg
+#   Message2.msg
+# )
+
+## Generate services in the 'srv' folder
+# add_service_files(
+#   FILES
+#   Service1.srv
+#   Service2.srv
+# )
+
+## Generate added messages and services with any dependencies listed here
+# generate_messages(
+#   DEPENDENCIES
+#   auv_msgs
+# )
+
+###################################
+## catkin specific configuration ##
+###################################
+## The catkin_package macro generates cmake config files for your package
+## Declare things to be passed to dependent projects
+## LIBRARIES: libraries you create in this project that dependent projects also need
+## CATKIN_DEPENDS: catkin_packages dependent projects also need
+## DEPENDS: system dependencies of this project that dependent projects also need
+catkin_package(
+   INCLUDE_DIRS include
+#  LIBRARIES labust_sim
+#  CATKIN_DEPENDS auv_msgs roscpp rospy tf
+#  DEPENDS system_lib
+)
+
+###########
+## Build ##
+###########
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+
+include_directories(include
+  ${Eigen_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS}
+)
+
+file(GLOB SRC src/labust_sim/*.cpp)
+file(GLOB HPP include/labust/simulation/*.hpp include/labust/simulation/*.h) 
+add_library(labust_sim ${SRC} ${HPP})
+target_link_libraries(labust_sim ${Boost_RANDOM_LIBRARY})
+
+#file(GLOB SRC src/sim_sensors/*.cpp)
+#file(GLOB HPP include/labust/ros/*.hpp) 
+#add_library(sim_sensors ${SRC} ${HPP})
+
+file(GLOB SRC src/uvsim/*.cpp)
+file(GLOB HPP include/labust/ros/*.hpp) 
+add_executable(uvsim ${SRC} ${HPP})
+target_link_libraries(uvsim ${catkin_LIBRARIES} labust_sim ${Boost_RANDOM_LIBRARY})
+
+#Simple simulated sensors
+add_executable(imu_sim src/sim_sensors/ImuSim.cpp)
+target_link_libraries(imu_sim ${catkin_LIBRARIES})
+add_executable(dvl_sim src/sim_sensors/DvlSim.cpp)
+target_link_libraries(dvl_sim ${catkin_LIBRARIES})
+add_executable(gps_sim src/sim_sensors/GPSSim.cpp)
+target_link_libraries(gps_sim ${catkin_LIBRARIES})
+add_executable(current_sensor_sim src/sim_sensors/CurrentSensorSim.cpp)
+target_link_libraries(current_sensor_sim ${catkin_LIBRARIES})
+add_executable(ping_sim src/sim_sensors/PingSim.cpp)
+target_link_libraries(ping_sim ${catkin_LIBRARIES})
+add_executable(battery_sensor_sim src/sim_sensors/BatterySensorSim.cpp)
+target_link_libraries(battery_sensor_sim ${catkin_LIBRARIES})
+add_executable(docking_sim src/sim_sensors/DockingSim.cpp)
+target_link_libraries(docking_sim ${catkin_LIBRARIES})
+add_executable(diver_sim src/diver_sim/diver_sim.cpp)
+target_link_libraries(diver_sim labust_sim ${catkin_LIBRARIES})
+add_executable(navsts2odom src/navsts2odom/navsts2odom.cpp)
+target_link_libraries(navsts2odom ${catkin_LIBRARIES})
+add_executable(usbl_sim src/data_sim/USBLSim.cpp)
+target_link_libraries(usbl_sim ${catkin_LIBRARIES})
+
+if (DEFINED catkin_EXPORTED_TARGETS)
+ add_dependencies(imu_sim ${catkin_EXPORTED_TARGETS})
+ add_dependencies(dvl_sim ${catkin_EXPORTED_TARGETS})
+ add_dependencies(gps_sim ${catkin_EXPORTED_TARGETS})
+ add_dependencies(current_sensor_sim ${catkin_EXPORTED_TARGETS})
+ add_dependencies(battery_sensor_sim ${catkin_EXPORTED_TARGETS})
+ add_dependencies(docking_sim ${catkin_EXPORTED_TARGETS})
+ add_dependencies(ping_sim ${catkin_EXPORTED_TARGETS})
+ #add_dependencies(hdg_controller_direct ${catkin_EXPORTED_TARGETS})
+ add_dependencies(usbl_sim ${catkin_EXPORTED_TARGETS})
+ add_dependencies(uvsim ${catkin_EXPORTED_TARGETS})
+ add_dependencies(diver_sim ${catkin_EXPORTED_TARGETS})
+ add_dependencies(navsts2odom ${catkin_EXPORTED_TARGETS})
+endif()
+#############
+## Install ##
+#############
+
+# all install targets should use catkin DESTINATION variables
+# See http://ros.org/doc/groovy/api/catkin/html/adv_user_guide/variables.html
+
+## Mark executable scripts (Python etc.) for installation
+## in contrast to setup.py, you can choose the destination
+# install(PROGRAMS
+#   scripts/my_python_script
+#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
+
+## Mark executables and/or libraries for installation
+# install(TARGETS labust_sim labust_sim_node
+#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
+
+## Mark cpp header files for installation
+# install(DIRECTORY include/${PROJECT_NAME}/
+#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+#   FILES_MATCHING PATTERN "*.h"
+#   PATTERN ".svn" EXCLUDE
+# )
+
+## Mark other files for installation (e.g. launch and bag files, etc.)
+# install(FILES
+#   # myfile1
+#   # myfile2
+#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+
+#############
+## Testing ##
+#############
+
+## Add gtest based cpp test target and link libraries
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_labust_sim.cpp)
+# if(TARGET ${PROJECT_NAME}-test)
+#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
+# endif()
+
+## Add folders to be run by python nosetests
+# catkin_add_nosetests(test)

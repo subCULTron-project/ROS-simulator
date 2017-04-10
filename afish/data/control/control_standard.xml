@@ -1,0 +1,33 @@
+<launch>
+	<arg name="use_ident" default="$(optenv USE_IDENTIFICATION false)" />
+	<arg name="use_trackpoint" default="$(optenv USE_TRACKPOINT false)" />
+		
+ 	<!-- Low-level controller -->
+	<node pkg="labust_control" type="velocity_control" name="velcon">
+		<remap from="nuRef" to="nuRefMerged" />
+		<remap from="stateHat" to="position" />
+		<remap from="meas" to="measurement" />
+	</node>
+
+	<!-- ========================================================= -->
+	<!-- == High Level controllers =============================== -->
+	<!-- ========================================================= -->
+	<group>
+		<remap from="out" to="nuRef" />
+		<remap from="ref" to="stateRef" />
+		<remap from="state" to="position" />
+		<remap from="windup" to="tauAch" />
+
+	
+		<node pkg="labust_control" type="fadp_3d_controller" name="station_keeping">
+			<remap from="Enable" to="FADP_enable"/>
+		</node>
+
+		<node pkg="labust_control" type="async_merger" name="nu_merger">
+			<remap from="in" to="nuRef" />
+			<remap from="out" to="nuRefMerged" />
+			<param name="merge_nu" value="true" />
+		</node>
+				
+	</group>
+</launch>

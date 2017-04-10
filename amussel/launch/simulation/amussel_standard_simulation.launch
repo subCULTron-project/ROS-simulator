@@ -1,0 +1,148 @@
+<launch>
+  <param name="use_sim_time" value="true" />
+  <node name="simulation_clock2" pkg="snippets" type="simulation_clock2">
+
+    </node>
+  <arg default="$(optenv LOGGING false)" name="logging" />
+  <node args="--configfile $(find amussel)/data/simulation/swarm_test.xml       --dataPath  $(find amussel)/data/simulation/" name="uwsim" pkg="uwsim" type="uwsim" />
+  <group ns="amussel1">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[-8.52058362038,-11.0342562665,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel1/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+  <group ns="amussel2">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[3.81250817016,-9.38556718295,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel2/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+  <group ns="amussel3">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[10.2518079762,-0.233656444417,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel3/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+  <group ns="amussel4">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[5.852293754,5.8629299063,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel4/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+  <group ns="amussel5">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[2.16096554949,13.6720141583,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel5/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+  <group ns="amussel6">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[-0.685304146038,-11.383860047,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel6/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+  <group ns="amussel7">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[-5.4141835492,17.2558162697,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel7/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+  <group ns="amussel8">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[11.68768905,-10.6740193441,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel8/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+  <group ns="amussel9">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[-18.0202156973,-15.6919612046,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel9/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+  <group ns="amussel10">
+    <rosparam file="$(find amussel)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[18.2868073919,6.5114426815,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find amussel)/data/simulation/simulation_standard.xml" />
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/primitives/primitives_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel10/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="amussel" type="raw_controller.py" />
+  </group>
+</launch>

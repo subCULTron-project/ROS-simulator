@@ -1,0 +1,11 @@
+<launch>
+  <rosparam command="load" file="$(find snippets)/data/locations/labos.yaml" />
+  <rosparam command="load" file="$(find snippets)/data/allocations/x_horizontal.yaml" />
+  <rosparam command="load" file="$(find snippets)/data/models/pladypos.yaml" />
+  <param name="uvsim/publish_world" value="true" />
+  <include file="$(find labust_sim)/config/simulator.xml"  /> 
+  
+  <node pkg="labust_control" type="ident_node" name="ident">
+  	<remap from="meas" to="meas_ideal" />
+  </node>
+</launch>

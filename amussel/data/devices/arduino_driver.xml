@@ -1,0 +1,28 @@
+<launch>
+  <!-- Serial bridge to arduino -->
+  <arg name="driver_port" default="$(optenv ARDUINO_PORT /dev/arduino)" />
+  <arg name="driver_baud" default="$(optenv ARDUINO_BAUD 115200)" />
+
+  <node pkg="rosserial_python" type="serial_node.py" name="arduino" args="$(arg driver_port)" />
+  
+  <!-- Thrust allocator -->  
+  <node pkg="labust_allocation" name="alloc" type="allocation_node">
+    <rosparam command="load" 
+  	     file="$(find pladypos)/data/allocation/xconfig.yaml" />   
+    <param name="allocation_plugin" value="labust::allocation::X2dAdaptive" />
+    <param name="minN" value="1" />
+    <param name="daisy_chain" value="true" />
+    <param name="multi_chain" value="true" />
+    <param name="adapt_pwm" value="true" />
+    <param name="adapt_supply" value="true" />
+    <remap from="supply_voltage" to="battery_voltage" /> 
+    <remap from="tau_in" to="tauOut" />
+    <remap from="tau_ach" to="tauAch" />
+  </node>
+  <!--  <node pkg="pladypos" name="pladypos_node" type="pladypos_node_v3">
+      <param name="maxThrust" value="1"/>
+      <param name="minThrust" value="-1"/>
+      <param name="max_cap" value="0.8"/>
+      <remap from="tauIn" to="tauOut" />
+    </node> -->
+</launch>

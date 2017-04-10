@@ -1,0 +1,29 @@
+int32 Surge=0
+int32 Sway=1
+int32 Heave=2
+int32 Roll=3
+int32 Pitch=4
+int32 Yaw=5
+int32 Altitude=6
+
+#The identification GOAL
+int32 dof # Desired DOF to identify
+float32 command # Output force/torque to command in the relay
+float32 hysteresis # Hysteresis of the control relay
+float32 reference # State value around which to oscilate
+float32 sampling_rate # The desired sampling frequency for operation (Hz)
+---
+#The identification result
+int32 dof # The identified DOF
+float32 alpha # inertial parameter
+float32 beta # linear damping coefficient
+float32 betaa # quadratic damping coefficient
+float32 delta # the disturbance estimate
+float32 wn # the natural frequency of the oscillations
+---
+#The feedback result
+int32 dof # current DOF
+int32 oscillation_num # Number of performed oscillations
+float32 error # Average certainty error
+ 
+

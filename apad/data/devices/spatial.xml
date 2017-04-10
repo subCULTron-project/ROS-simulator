@@ -1,0 +1,19 @@
+<launch>
+  <!-- GPS+IMU setup -->
+  <arg name="spatial_port" default="$(optenv SPATIAL_PORT /dev/arduino)" />
+  <arg name="spatial_baud" default="$(optenv SPATIAL_BAUD 115200)" />
+  <arg name="use_spatial_gps" default="$(optenv SPATIAL_USE_GPS false)" />
+  
+  <node pkg="spatial_ins" type="spatial_node" name="spatial">
+	<param name="PortName" value="$(arg spatial_port)" />
+	<param name="Baud" value="$(arg spatial_baud)" />
+ 	<param name="ext_gps" value="true" />
+	<remap from="fix_in" to="gps"/>
+	<remap from="fix" to="gps" if="$(arg use_spatial_gps)"/>
+	<remap from="fix" to="fix_spatial" unless="$(arg use_spatial_gps)"/>
+  </node>
+  
+  <!-- For pure RPY measurements -->
+  <node pkg="labust_navigation" type="quat_to_euler" name="quat_conv" />
+
+</launch>

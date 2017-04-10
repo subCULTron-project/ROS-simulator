@@ -1,0 +1,10 @@
+## Spatial GPS+IMU
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="FTVOCTLA", SYMLINK+="spatial"
+## Novatel GPS
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="FTT7JX3A", SYMLINK+="novatel"
+## USBL
+SUBSYSTEM=="tty", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", SYMLINK+="usbl"
+## Ublox GPS
+SUBSYSTEM=="tty", ATTRS{product}=="u-blox 6  -  GPS Receiver", SYMLINK+="ublox"
+## Arduino driver
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0042", ATTRS{serial}=="A413936383135180B100", SYMLINK+="arduino"

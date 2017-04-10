@@ -1,0 +1,11 @@
+sampling_time: 0.1
+mass: 3
+gravity: 9.81
+fluid_density: 1025.0
+bounding_ellipsoid: [0.1,0.1,0.1]
+rg: [0, 0, 0]
+rb: [0, 0, 0]
+
+current: [0,0,0] # Initial currents (N,E,D)
+coupled: false # Use a coupled model
+

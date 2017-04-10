@@ -1,0 +1,17 @@
+sampling_time: 0.1
+mass: 3
+gravity: 9.81
+fluid_density: 1025.0
+
+# The bounding ellipsoid parameters (ax, ay, az) used for buoyancy calculation
+bounding_ellipsoid: [0.1,0.1,0.1]
+
+# The dynamic parameters
+rg: [0, 0, 0]
+rb: [0, 0, 0]
+
+# The initial states
+current: [0,0,0] # Initial currents (N,E,D)
+
+# The process and measurement noise specification
+coupled: false # Use a coupled model

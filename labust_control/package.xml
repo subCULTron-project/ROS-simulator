@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<package>
+  <name>labust_control</name>
+  <version>0.1.0</version>
+  <description>
+      The labust_control package contains all the low and high-level controllers
+      used for the vehicles and platforms at LABUST.
+  </description>
+
+  <maintainer email="dula.nad@gmail.com">Gyula Nagy</maintainer>
+  <license>BSD</license>
+  <!-- <url type="website">http://ros.org/wiki/labust_control</url> -->
+  <author email="dula.nad@gmail.com">Gyula Nagy</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>cmake_modules</build_depend>
+  <build_depend>auv_msgs</build_depend>
+  <build_depend>navcon_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>snippets</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  
+  <run_depend>message_runtime</run_depend>
+  <run_depend>auv_msgs</run_depend>
+  <run_depend>navcon_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>snippets</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>tf2_ros</run_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
+
+  <export>
+	<rosdoc config="rosdoc.yaml" />
+  </export>
+</package>

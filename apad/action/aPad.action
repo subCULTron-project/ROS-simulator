@@ -1,0 +1,15 @@
+#goal definition
+int16 id        # 0 - go to position
+geometry_msgs/Pose pose
+string object 			# used for docking -- docked object namespace
+geometry_msgs/Pose pose_offset  # used for docking -- docked object offset
+---
+#result definition
+int16 id
+int16 status
+geometry_msgs/Pose pose
+---
+#feedback
+int16 id
+float32 status
+geometry_msgs/Pose pose

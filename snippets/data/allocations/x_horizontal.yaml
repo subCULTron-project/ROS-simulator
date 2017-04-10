@@ -1,0 +1,20 @@
+#The thruster allocation
+# The allocation type: 
+#   0 - none, allocation matrix defaults to identity
+#   1 - default allocation with limit on thrusters 
+#   2 - allocation with scaling
+allocation_type: 2
+#The tau vector elements (DOF) controlled
+#                [X, Y, Z, K, M, N]
+allocation_dofs: [1, 1, 0, 0, 0, 1]
+#The thruster grouping for multi-scaling allocation
+# Default is all in the same group
+#The allocation matrix
+allocation_matrix: [[-0.7071, 0.7071, 0.7071, -0.7071],
+                    [-0.7071, -0.7071, 0.7071, 0.7071],
+                    [1, -1, 1, -1]]
+
+
+
+
+

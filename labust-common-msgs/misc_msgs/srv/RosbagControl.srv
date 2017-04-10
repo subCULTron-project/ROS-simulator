@@ -1,0 +1,3 @@
+string action # Rosbag action
+---
+bool result # Action result

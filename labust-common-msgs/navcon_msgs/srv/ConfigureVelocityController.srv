@@ -1,0 +1,17 @@
+#Operation modes
+int32 DisableAxis=0
+int32 ManualAxis=1
+int32 ControlAxis=2
+int32 IdentAxis=3
+int32 DirectAxis=4
+
+int32 u=0
+int32 v=1
+int32 w=2
+int32 p=3
+int32 q=4
+int32 r=5
+
+string ControllerName
+int32[6] desired_mode
+---
