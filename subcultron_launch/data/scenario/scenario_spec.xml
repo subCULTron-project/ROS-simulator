@@ -1,45 +1,10 @@
 <?xml version="1.0"?>
 
 <scenarioSpecFile>
-	<scenario>
-		<name>scenario_one</name>
-		<controllerFile>controller_for_scenario_one.py</controllerFile>
-		<simulationXmlFile>simulation_scenario_one.xml</simulationXmlFile>
-		<agent>aMussel</agent>
-	</scenario>
-
-	<scenario>
-		<name>trust_scenario</name>
-		<controllerFile>controller_for_trust_scenario.py</controllerFile>
-		<simulationXmlFile>simulation_trust_scenario.xml</simulationXmlFile>
-		<agent>aMussel</agent>
-		<agent>aFish</agent>
-	</scenario>
-
-	<scenario>
-		<name>docking_scenario</name>
-		<controllerFile>controller_for_docking_scenario.py</controllerFile>
-		<simulationXmlFile>simulation_docking_scenario.xml</simulationXmlFile>
-		<agent>aMussel</agent>
-		<agent>aPad</agent>
-	</scenario>
-
-	<scenario>
-		<name>API_test</name>
-		<controllerFile>API_test.py</controllerFile>
-		<simulationXmlFile>simulation_API_test.xml</simulationXmlFile>
-		<agent>aPad</agent>
-		<agent>aMussel</agent>
-		<agent>aFish</agent>
-	</scenario>
-
-        <scenario>
-		<name>gpgp_agent</name>
-		<controllerFile></controllerFile>
-		<simulationXmlFile>simulation_gpgp_agent.xml</simulationXmlFile>
-		<agent>aPad</agent>
-		<agent>aMussel</agent>
-		<agent>aFish</agent>
-	</scenario>
-
+    <scenario>
+        <name></name>
+        <controllerFile></controllerFile>
+        <simulationXmlFile></simulationXmlFile>
+        <agent></agent>
+    </scenario>
 </scenarioSpecFile>
