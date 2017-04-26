@@ -1,0 +1,80 @@
+<launch>
+  <arg default="$(optenv LOGGING false)" name="logging" />
+  <node args="--configfile $(find subcultron_launch)/data/simulation/swarm_test.xml         --dataPath  $(find subcultron_launch)/data/simulation/" name="uwsim" pkg="uwsim" type="uwsim" />
+  <group ns="apad10">
+    <rosparam file="$(find apad)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find apad)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find apad)/data/dynamics/apad.yaml" />
+    <rosparam param="eta0">[-12.0,12.0,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find apad)/data/locations/swarm_loc.yaml" />
+    <include file="$(find apad)/data/devices/static_frames.xml" />
+    <include file="$(find api_test)data/apad/simulation_API_test.xml">
+      <arg name="battery_level" value="80.3" />
+    </include>
+    <include file="$(find apad)/data/control/control_standard.xml" />
+    <include file="$(find apad)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="apad10/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="api_test" type="aPad_API_test.py" />
+    <node name="action_server" output="screen" pkg="apad" type="action_server.py" />
+  </group>
+  <group ns="apad11">
+    <rosparam file="$(find apad)/data/navigation/params/nav_standard.yaml" />
+    <rosparam file="$(find apad)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find apad)/data/dynamics/apad.yaml" />
+    <rosparam param="eta0">[4.0,100.0,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find apad)/data/locations/swarm_loc.yaml" />
+    <include file="$(find apad)/data/devices/static_frames.xml" />
+    <include file="$(find api_test)data/apad/simulation_API_test.xml">
+      <arg name="battery_level" value="52.0" />
+    </include>
+    <include file="$(find apad)/data/control/control_standard.xml" />
+    <include file="$(find apad)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="apad11/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="api_test" type="aPad_API_test.py" />
+    <node name="action_server" output="screen" pkg="apad" type="action_server.py" />
+  </group>
+  <group ns="afish2">
+    <rosparam file="$(find afish)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find afish)/data/dynamics/afish.yaml" />
+    <rosparam param="eta0">[23.0,-50.0,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find afish)/data/locations/swarm_loc.yaml" />
+    <include file="$(find api_test)data/afish/simulation_API_test.xml">
+      <arg name="battery_level" value="12.323" />
+    </include>
+    <include file="$(find afish)/data/control/control_standard.xml" />
+    <include file="$(find afish)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="afish2/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="api_test" type="aFish_API_test.py" />
+  </group>
+  <group ns="amussel1">
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[0.0,0.0,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find api_test)data/amussel/simulation_API_test.xml">
+      <arg name="battery_level" value="0.3" />
+    </include>
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel1/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="api_test" type="aMussel_API_test.py" />
+  </group>
+  <group ns="amussel2">
+    <rosparam file="$(find amussel)/data/control/params/controllers_standard.yaml" />
+    <rosparam file="$(find amussel)/data/dynamics/amussel.yaml" />
+    <rosparam param="eta0">[100.0,13.0,0,0,0,0]</rosparam>
+    <rosparam command="load" file="$(find amussel)/data/locations/swarm_loc.yaml" />
+    <include file="$(find api_test)data/amussel/simulation_API_test.xml">
+      <arg name="battery_level" value="100.0" />
+    </include>
+    <include file="$(find amussel)/data/control/control_standard.xml" />
+    <include file="$(find amussel)/data/simulation/visualization_standard.xml">
+      <arg name="hook_sel" value="amussel2/uwsim_hook" />
+    </include>
+    <node name="scenario_controller" output="screen" pkg="api_test" type="aMussel_API_test.py" />
+  </group>
+</launch>
