@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
+from auv_msgs.msg import NED
+import rospy
+
 """
 Environment simulation class. Initializes the ROS node for complete environment simulation.
-It includes current simulation, temperature simulation ...
+It includes current simulation, temperature simulation, noise source simulation.
 """
 
 __author__ = "barbanas"
 
-from std_msgs.msg import Bool
-from auv_msgs.msg import NED
-import rospy
 
 class EnvironmentSim(object):
 
@@ -32,7 +32,6 @@ class EnvironmentSim(object):
             self.init_noise_sim()
         
         rospy.spin()
-
     
     def init_current_sim(self):
         """
@@ -40,8 +39,8 @@ class EnvironmentSim(object):
         it generates an instance of respective class. If the current_mode is set to 
         "none", the object will not be created.
         """
-        currentMode = rospy.get_param('~current_mode')
-        if currentMode == "constant":
+        current_mode = rospy.get_param('~current_mode')
+        if current_mode == "constant":
             try:
                 from current_sim_constant import CurrentSimConstant
             except ImportError:
@@ -54,7 +53,7 @@ class EnvironmentSim(object):
                 filename = "currentInfo.txt"
             self.currentSim = CurrentSimConstant(filename)
 
-        elif currentMode == "periodic":
+        elif current_mode == "periodic":
             try:
                 from current_sim_periodic import CurrentSimPeriodic
             except ImportError:
@@ -67,7 +66,7 @@ class EnvironmentSim(object):
                 same level as other elif keywords).
             ***
             Template:
-            elif currentMode == "mode":
+            elif current_mode == "mode":
                 try:
                     from current_sim_mode import CurrentSimMode
                 except ImportError:
@@ -79,11 +78,11 @@ class EnvironmentSim(object):
                     see already implemented modes)
             '''
 
-        elif currentMode == "none":
+        elif current_mode == "none":
             return 0
 
         else:
-            rospy.logerr("Current mode {0} is not implemented!".format(currentMode))
+            rospy.logerr("Current mode {0} is not implemented!".format(current_mode))
 
     def init_temp_sim(self):
         """
@@ -91,8 +90,8 @@ class EnvironmentSim(object):
         it generates an instance of respective class. If the temp_mode is set to 
         "none", the object will not be created.
         """
-        tempMode = rospy.get_param('~temp_mode')
-        if tempMode == "constant":
+        temp_mode = rospy.get_param('~temp_mode')
+        if temp_mode == "constant":
             try:
                 from temperature_sim_constant import TemperatureSimConstant
             except ImportError:
@@ -110,7 +109,7 @@ class EnvironmentSim(object):
                     same level as other elif keywords).
             ***
             Template:
-            elif tempMode == "mode":
+            elif temp_mode == "mode":
                 try:
                     from temperature_sim_mode import TemperatureSimMode
                 except ImportError:
@@ -122,11 +121,11 @@ class EnvironmentSim(object):
                     see already implemented modes)
             '''
 
-        elif tempMode == "none":
+        elif temp_mode == "none":
             return 0
 
         else:
-            rospy.logerr("Temperature mode {0} is not implemented!".format(tempMode))
+            rospy.logerr("Temperature mode {0} is not implemented!".format(temp_mode))
             
     def init_noise_sim(self):
         """
@@ -134,27 +133,27 @@ class EnvironmentSim(object):
         it generates an instance of respective class. If the noise_mode is set to 
         "none", the object will not be created.
         """
-        noiseMode = rospy.get_param('~noise_mode')
-        if noiseMode == "static":
+        noise_mode = rospy.get_param('~noise_mode')
+        if noise_mode == "static":
             try:
                 from noise_sim_static import NoiseSimStatic
             except ImportError:
                 rospy.logerr("ERROR: Can't import module NoiseSimstatic")
                 return -1
             
-            sourcePosition = NED()
-            sourcePosition.north = rospy.get_param('~noise_source_north')
-            sourcePosition.east = rospy.get_param('~noise_source_east')
-            sourcePosition.depth = rospy.get_param('~noise_source_depth')
+            source_position = NED()
+            source_position.north = rospy.get_param('~noise_source_north')
+            source_position.east = rospy.get_param('~noise_source_east')
+            source_position.depth = rospy.get_param('~noise_source_depth')
             
-            self.noiseSim = NoiseSimStatic(sourcePosition)
+            self.noiseSim = NoiseSimStatic(source_position)
 
             '''
             You can insert new noise modes here (just unindent for one tab to be in the
                     same level as other elif keywords).
             ***
             Template:
-            elif noiseMode == "mode":
+            elif noise_mode == "mode":
                 try:
                     from noise_sim_mode import NoiseSimMode
                 except ImportError:
@@ -166,11 +165,11 @@ class EnvironmentSim(object):
                     see already implemented modes)
             '''
 
-        elif noiseMode == "none":
+        elif noise_mode == "none":
             return 0
 
         else:
-            rospy.logerr("Noise mode {0} is not implemented!".format(noiseMode))
+            rospy.logerr("Noise mode {0} is not implemented!".format(noise_mode))
 
 
 if __name__ == '__main__':

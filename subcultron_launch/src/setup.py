@@ -255,7 +255,7 @@ def fill_up_launch_file(root, n_pad, positions_pad, first_index_pad, battery_pad
             group.append(xml.etree.ElementTree.Element("node", {"pkg": controller_file_aFish[0],
                                                                 "type": controller_file_aFish[1],
                                                                 "name": "scenario_controller"}))
-    root.append(group)
+        root.append(group)
 
     for i in range(n_mussel):
         name = 'amussel' + str(first_index_mussel + i)
@@ -346,9 +346,9 @@ if __name__ == "__main__":
 
             start_indices = child.find('startIndices')
             if start_indices is None:
-                apad_first_index = 0
-                afish_first_index = 0
-                amussel_first_index = 0
+                apad_first_index = 1
+                afish_first_index = 1
+                amussel_first_index = 1
             else:
                 if start_indices.find('aPad') is None:
                     apad_first_index = 1
@@ -515,6 +515,13 @@ if __name__ == "__main__":
                 print "error in battery file definition, too few position entries!"
                 sys.exit(2)
 
+            if apad_number == 0:
+                apad_battery.append(0)
+            if afish_number == 0:
+                afish_battery.append(0)
+            if amussel_number == 0:
+                amussel_battery.append(0)
+
             if max(apad_battery) > 100 or max(afish_battery) > 100 or max(amussel_battery) > 100 or min(apad_battery) \
                     < 0 or min(afish_battery) < 0 or min(amussel_battery) < 0:
                 print "error in battery file definition, values out of range [0,100]!"
@@ -584,49 +591,55 @@ if __name__ == "__main__":
 
         fileOut.close()
 
-        if child.find('simulation_spec_apad') is None and apad_number > 0:
-            print "no simulation specification file defined for aPad!"
-            sys.exit(2)
+        if child.find('simulation_spec_apad') is None:
+            if apad_number > 0:
+                print "no simulation specification file defined for aPad!"
+                sys.exit(2)
         else:
             tmp = child.find('simulation_spec_apad')
             simulation_spec_file_aPad.append(tmp.find('pkg').text)
             simulation_spec_file_aPad.append(tmp.find('path').text)
 
-        if child.find('simulation_spec_afish') is None and afish_number > 0:
-            print "no simulation specification file defined for aFish!"
-            sys.exit(2)
+        if child.find('simulation_spec_afish') is None:
+            if afish_number > 0:
+                print "no simulation specification file defined for aFish!"
+                sys.exit(2)
         else:
             tmp = child.find('simulation_spec_afish')
             simulation_spec_file_aFish.append(tmp.find('pkg').text)
             simulation_spec_file_aFish.append(tmp.find('path').text)
 
-        if child.find('simulation_spec_amussel') is None and amussel_number > 0:
-            print "no simulation specification file defined for aMussel!"
-            sys.exit(2)
+        if child.find('simulation_spec_amussel') is None:
+            if amussel_number > 0:
+                print "no simulation specification file defined for aMussel!"
+                sys.exit(2)
         else:
             tmp = child.find('simulation_spec_amussel')
             simulation_spec_file_aMussel.append(tmp.find('pkg').text)
             simulation_spec_file_aMussel.append(tmp.find('path').text)
 
-        if child.find('controller_apad') is None and apad_number > 0:
-            print "no simulation controller defined for aPad!"
-            sys.exit(2)
+        if child.find('controller_apad') is None:
+            if apad_number > 0:
+                print "no simulation controller defined for aPad!"
+                sys.exit(2)
         else:
             tmp = child.find('controller_apad')
             controller_file_aPad.append(tmp.find('pkg').text)
             controller_file_aPad.append(tmp.find('fname').text)
 
-        if child.find('controller_afish') is None and afish_number > 0:
-            print "no simulation controller defined for aFish!"
-            sys.exit(2)
+        if child.find('controller_afish') is None:
+            if afish_number > 0:
+                print "no simulation controller defined for aFish!"
+                sys.exit(2)
         else:
             tmp = child.find('controller_afish')
             controller_file_aFish.append(tmp.find('pkg').text)
             controller_file_aFish.append(tmp.find('fname').text)
 
-        if child.find('controller_amussel') is None and amussel_number > 0:
-            print "no simulation controller defined for aMussel!"
-            sys.exit(2)
+        if child.find('controller_amussel') is None:
+            if amussel_number > 0:
+                print "no simulation controller defined for aMussel!"
+                sys.exit(2)
         else:
             tmp = child.find('controller_amussel')
             controller_file_aMussel.append(tmp.find('pkg').text)
