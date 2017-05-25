@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<simulationConfigFile>
+    <vehicles>
+		<!-->Specify robot number<-->
+        <aPadNumber>1</aPadNumber>
+        <aFishNumber>1</aFishNumber>
+        <aMusselNumber>1</aMusselNumber>
+
+		<!-->Position and battery specification files (uncomment and replace path to file with your own files).
+		If left unspecified, values will be generated randomly.<-->
+		<!--positions>/home/barbara/ros_workspaces/subcultron_simulator/src/controllers/template/data/positions.txt</positions-->
+		<!--battery>/home/barbara/ros_workspaces/subcultron_simulator/src/controllers/template/data/battery.txt</battery-->
+
+		<!-->Robot simulation config files<-->
+		<simulation_spec_amussel>
+			<pkg>template</pkg>
+			<path>data/amussel/simulation_template.xml</path>
+		</simulation_spec_amussel>
+
+		<simulation_spec_afish>
+			<pkg>template</pkg>
+			<path>data/afish/simulation_template.xml</path>
+		</simulation_spec_afish>
+
+		<simulation_spec_apad>
+			<pkg>template</pkg>
+			<path>data/apad/simulation_template.xml</path>
+		</simulation_spec_apad>
+
+		<!-->Robot controllers<-->
+		<controller_amussel>
+			<pkg>template</pkg>
+			<fname>aMussel_template_controller.py</fname>
+		</controller_amussel>
+
+		<controller_afish>
+			<pkg>template</pkg>
+			<fname>aFish_template_controller.py</fname>
+		</controller_afish>
+
+		<controller_apad>
+			<pkg>template</pkg>
+			<fname>aPad_template_controller.py</fname>
+		</controller_apad>
+    </vehicles>
+</simulationConfigFile>

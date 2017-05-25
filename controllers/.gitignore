@@ -1,0 +1,8 @@
+*.pyc
+*.py~
+*.txt~
+*.msg~
+*.srv~
+*.gitignore~
+*.xml~
+*.launch~

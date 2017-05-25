@@ -440,7 +440,7 @@ if __name__ == "__main__":
 
                 for line in lines[1:]:
                     # skip empty lines (only newline)
-                    if len(line) <= 1:
+                    if len(line) <= 1 or line[0] == '#':
                         continue
 
                     pos = line.split(' ')
@@ -499,7 +499,7 @@ if __name__ == "__main__":
 
             for line in lines[1:]:
                 # skip empty lines (only newline)
-                if len(line) <= 1:
+                if len(line) <= 1 or line[0] == '#':
                     continue
 
                 bat = line.split(' ')
